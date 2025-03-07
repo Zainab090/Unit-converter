@@ -4,7 +4,6 @@ import random
 import requests
 
 from io import BytesIO
-from forex_python.converter import CurrencyRates
 
 # ----------------- Page Config -----------------
 st.set_page_config(
@@ -92,16 +91,6 @@ elif category == "Temperature":
         result = convert_temperature(value, from_unit, to_unit)
         st.success(f"{value} {from_unit} = {result:.2f} {to_unit}")
 
-elif category == "Currency Exchange":
-    st.write("### 💰 Live Currency Converter")
-    from_currency = st.selectbox("From Currency:", ["USD", "EUR", "GBP", "INR", "JPY", "AUD"], key="currency_from")
-    to_currency = st.selectbox("To Currency:", ["USD", "EUR", "GBP", "INR", "JPY", "AUD"], key="currency_to")
-    amount = st.number_input("Enter Amount:", min_value=0.0, format="%.2f", key="currency_amount")
-    if st.button("Convert", key="currency_convert"):
-        c = CurrencyRates()
-        rate = c.get_rate(from_currency, to_currency)
-        converted_amount = amount * rate
-        st.success(f"{amount} {from_currency} = {converted_amount:.2f} {to_currency}")
 
 
 # ----------------- Footer -----------------
