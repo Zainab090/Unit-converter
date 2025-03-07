@@ -2,7 +2,7 @@ import streamlit as st
 import time
 import random
 import requests
-import qrcode
+
 from io import BytesIO
 from forex_python.converter import CurrencyRates
 
@@ -103,14 +103,6 @@ elif category == "Currency Exchange":
         converted_amount = amount * rate
         st.success(f"{amount} {from_currency} = {converted_amount:.2f} {to_currency}")
 
-elif category == "Generate QR Code":
-    st.write("### 📱 Generate QR Code")
-    qr_text = st.text_input("Enter Text or URL:", key="qr_text")
-    if st.button("Generate QR Code", key="qr_generate"):
-        qr = qrcode.make(qr_text)
-        buffer = BytesIO()
-        qr.save(buffer, format="PNG")
-        st.image(buffer.getvalue(), caption="Your QR Code", use_column_width=True)
 
 # ----------------- Footer -----------------
 st.markdown("<p class='footer'>✨ Convert, Explore & Elevate with the Mesmerizing Converter! ✨</p>", unsafe_allow_html=True)
